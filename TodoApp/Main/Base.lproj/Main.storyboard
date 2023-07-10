@@ -63,6 +63,9 @@
                                                 </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="新規登録"/>
+                                                <connections>
+                                                    <action selector="tapRegisterButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xbX-V1-FdT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -100,6 +103,9 @@
                                                 </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="ログイン"/>
+                                                <connections>
+                                                    <action selector="tapLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4jm-uf-cae"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Bw-KS-jXr">
                                                 <rect key="frame" x="76.666666666666686" y="369.33333333333331" width="240" height="20"/>
@@ -122,6 +128,13 @@
                             <constraint firstItem="llQ-4F-Plz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="thB-VT-sXs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginEmailTextField" destination="ySy-ZI-SBx" id="BRE-W3-3oO"/>
+                        <outlet property="loginPasswordTextField" destination="esd-2A-7RD" id="RQy-EH-ifh"/>
+                        <outlet property="registerEmailTextField" destination="fhk-6m-D6d" id="uQY-af-A0E"/>
+                        <outlet property="registerNameTextField" destination="7SZ-PU-JCO" id="T4M-Ye-3Rp"/>
+                        <outlet property="registerPasswordTextField" destination="UHg-Xw-UNw" id="vYS-qc-VMl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
