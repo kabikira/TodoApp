@@ -1,18 +1,16 @@
 //
-//  TodoEditViewController.swift
+//  TodoAddViewController.swift
 //  TodoApp
 //
-//  Created by koala panda on 2023/07/08.
+//  Created by koala panda on 2023/07/20.
 //
 
 import UIKit
 
-class TodoEditViewController: UIViewController {
+class TodoAddViewController: UIViewController {
 
     @IBOutlet private weak var titleTextField: UITextField!
     @IBOutlet private weak var detailTextView: UITextView!
-    @IBOutlet private weak var doneButton: UIButton!
-    @IBOutlet private weak var isDoneLabel: UILabel!
 
 
     override func viewDidLoad() {
@@ -23,14 +21,8 @@ class TodoEditViewController: UIViewController {
         detailTextView.layer.masksToBounds = true
 
     }
+    
 
-    @IBAction private func tapDoneButton(_ sender: Any) {
+    @IBAction func tapAddButton(_ sender: Any) {
     }
-
-    @IBAction private func tapEditButton(_ sender: Any) {
-    }
-
-    @IBAction private func tapDeleteButton(_ sender: Any) {
-    }
-
 }

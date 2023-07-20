@@ -18,8 +18,5 @@ final class TodoListCell: UITableViewCell {
         self.titleLabel.text = nil
     }
 
-//    func configure(qiitaModel: QiitaModel) {
-//        self.tatleLabel.text = qiitaModel.title
-//    }
 
 }

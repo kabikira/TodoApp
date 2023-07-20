@@ -9,21 +9,27 @@ import UIKit
 
 class TodoListViewController: UIViewController {
 
+    @IBOutlet private weak var tableView: UITableView! {
+        didSet {
+            tableView.register(UINib.init(nibName: TodoListCell.className, bundle: nil), forCellReuseIdentifier: TodoListCell.className)
+        }
+    }
+    @IBOutlet private weak var userNameLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+    }
+
+    @IBAction func tapLogoutButton(_ sender: Any) {
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func tapAddButton(_ sender: Any) {
     }
-    */
+
+    @IBAction func changeDoneControl(_ sender: UISegmentedControl) {
+    }
+
+
 
 }

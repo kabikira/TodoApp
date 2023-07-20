@@ -21,33 +21,36 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4hR-0n-udL" userLabel="Top Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="33"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbp-ce-QfJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="131" height="36"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="131" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="logout">
                                                     <color key="titleColor" red="0.0" green="0.45882352939999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tapLogoutButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pDT-TT-eXs"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TODO一覧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTu-L8-xMM">
-                                                <rect key="frame" x="131" y="0.0" width="131" height="36"/>
+                                                <rect key="frame" x="131" y="0.0" width="131" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="RWV-al-tyx">
-                                                <rect key="frame" x="262" y="0.0" width="131" height="36"/>
+                                                <rect key="frame" x="262" y="0.0" width="131" height="33"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ログイン中" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxj-hH-PDw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="131" height="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="131" height="14"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgR-Al-OCm">
-                                                        <rect key="frame" x="0.0" y="19" width="131" height="17"/>
+                                                        <rect key="frame" x="0.0" y="16" width="131" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -57,7 +60,7 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NYY-ag-c8U">
-                                        <rect key="frame" x="0.0" y="36" width="393" height="692"/>
+                                        <rect key="frame" x="0.0" y="33" width="393" height="695"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7LA-5L-NZe" userLabel="Bootom Stack View">
@@ -73,6 +76,9 @@
                                                     <segment title="未完了"/>
                                                     <segment title="完了済み"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="changeDoneControl:" destination="Y6W-OH-hqX" eventType="valueChanged" id="wEq-Iz-bRM"/>
+                                                </connections>
                                             </segmentedControl>
                                         </subviews>
                                     </stackView>
@@ -86,6 +92,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="plus.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="tapAddButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gpe-Co-gWf"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -99,6 +108,10 @@
                             <constraint firstAttribute="bottom" secondItem="6xu-Px-OuD" secondAttribute="bottom" constant="90" id="aQe-rS-sUg"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="NYY-ag-c8U" id="kBB-4t-H4E"/>
+                        <outlet property="userNameLabel" destination="NgR-Al-OCm" id="UF2-FD-qSS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
