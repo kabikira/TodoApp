@@ -52,11 +52,7 @@ class TodoEditViewController: UIViewController {
                     "updatedAt": FieldValue.serverTimestamp()
                 ]
                 ,completion: { error in
-                    if let error = error {
-                        print("TODO更新失敗: " + error.localizedDescription)
-                        let dialog = UIAlertController(title: "TODO更新失敗", message: error.localizedDescription, preferredStyle: .alert)
-                        dialog.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(dialog, animated: true, completion: nil)
+                    if let error = error {                        self.showErrorAlert(error: error, title: "TODO更新失敗", vc: self)
                     } else {
                         print("TODO更新成功")
                         self.navigationController?.popViewController(animated: true)
@@ -77,10 +73,7 @@ class TodoEditViewController: UIViewController {
                     ]
                     ,completion: { error in
                         if let error = error {
-                            print("TODO更新失敗: " + error.localizedDescription)
-                            let dialog = UIAlertController(title: "TODO更新失敗", message: error.localizedDescription, preferredStyle: .alert)
-                            dialog.addAction(UIAlertAction(title: "OK", style: .default))
-                            self.present(dialog, animated: true, completion: nil)
+                            self.showErrorAlert(error: error, title: "TODO更新失敗", vc: self)
                         } else {
                             print("TODO更新成功")
                             self.navigationController?.popViewController(animated: true)
@@ -94,10 +87,7 @@ class TodoEditViewController: UIViewController {
         if let user = Auth.auth().currentUser {
                     Firestore.firestore().collection("users/\(user.uid)/todos").document(todoId).delete(){ error in
                         if let error = error {
-                            print("TODO削除失敗: " + error.localizedDescription)
-                            let dialog = UIAlertController(title: "TODO削除失敗", message: error.localizedDescription, preferredStyle: .alert)
-                            dialog.addAction(UIAlertAction(title: "OK", style: .default))
-                            self.present(dialog, animated: true, completion: nil)
+                            self.showErrorAlert(error: error, title: "TODO削除失敗", vc: self)
                         } else {
                             print("TODO削除成功")
                             self.navigationController?.popViewController(animated: true)

@@ -98,11 +98,8 @@ class TodoListViewController: UIViewController {
                 Router.shared.showReStart()
 
             } catch let error as NSError {
-                print("ログアウト失敗: " + error.localizedDescription)
                 // ②が失敗した場合
-                let dialog = UIAlertController(title: "ログアウト失敗", message: error.localizedDescription, preferredStyle: .alert)
-                dialog.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(dialog, animated: true, completion: nil)
+                showErrorAlert(error: error, title: "ログアウト失敗", vc: self)
             }
         }
     }
@@ -174,10 +171,7 @@ extension TodoListViewController: UITableViewDelegate {
                     ]
                     ,completion: { error in
                         if let error = error {
-                            print("TODO更新失敗: " + error.localizedDescription)
-                            let dialog = UIAlertController(title: "TODO更新失敗", message: error.localizedDescription, preferredStyle: .alert)
-                            dialog.addAction(UIAlertAction(title: "OK", style: .default))
-                            self.present(dialog, animated: true, completion: nil)
+                            self.showErrorAlert(error: error, title: "TODO更新失敗", vc: self)
                         } else {
                             print("TODO更新成功")
                             self.getTodoDataForFirestore()
@@ -199,10 +193,7 @@ extension TodoListViewController: UITableViewDelegate {
             if let user = Auth.auth().currentUser {
                 Firestore.firestore().collection("users/\(user.uid)/todos").document(self.todoIdArray[indexPath.row]).delete() { error in
                     if let error = error  {
-                        print("TODO削除失敗: " + error.localizedDescription)
-                        let dialog = UIAlertController(title: "TODO削除失敗", message: error.localizedDescription, preferredStyle: .alert)
-                        dialog.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(dialog, animated: true, completion: nil)
+                        self.showErrorAlert(error: error, title: "TODO削除失敗", vc: self)
                     } else {
                         print("TODO削除成功")
                         self.getTodoDataForFirestore()

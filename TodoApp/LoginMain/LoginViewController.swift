@@ -32,11 +32,7 @@ class LoginViewController: UIViewController {
                     Firestore.firestore().collection("users").document(user.uid).setData( ["name": name], completion: { error in
                         if let error = error {
                             // ②が失敗した場合
-                            print("Firestore 新規登録失敗 " + error.localizedDescription)
-                            // dialogよりAlertに命名したほうが良くない??
-                            let dialog = UIAlertController(title: "新規登録失敗", message: error.localizedDescription, preferredStyle: .alert)
-                            dialog.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                            self.present(dialog, animated: true, completion: nil)
+                            self.showErrorAlert(error: error, title: "Firestore 新規登録失敗", vc: self)
                         } else {
                             print("ユーザー作成完了 name:" + name)
                             // ③成功した場合はTodo一覧画面に画面遷移を行う
@@ -47,10 +43,7 @@ class LoginViewController: UIViewController {
 
                     })
                 } else if let error = error {
-                    print("Firebase Auth 新規登録失敗 " + error.localizedDescription)
-                    let dialog = UIAlertController(title: "新規登録失敗", message: error.localizedDescription, preferredStyle: .alert)
-                    dialog.addAction(UIAlertAction(title: "Ok", style: .default))
-                    self.present(dialog, animated: true, completion: nil)
+                    self.showErrorAlert(error: error, title: "Firebase Auth 新規登録失敗 ", vc: self)
                 }
             })
 
@@ -68,10 +61,7 @@ class LoginViewController: UIViewController {
                     Router.shared.showTodoList(from: self)
                 } else if let error = error {
                     // ①が失敗した場合
-                    print("ログイン失敗 " + error.localizedDescription)
-                    let dialog = UIAlertController(title: "ログイン失敗", message: error.localizedDescription, preferredStyle: .alert)
-                    dialog.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(dialog, animated: true, completion: nil)
+                    self.showErrorAlert(error: error, title: "ログイン失敗", vc: self)
                 }
             })
         }
