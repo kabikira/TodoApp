@@ -23,6 +23,7 @@
 		3B81206C2A69232500E11F87 /* TodoEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B81206B2A69232500E11F87 /* TodoEdit.storyboard */; };
 		3B81206E2A69374100E11F87 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B81206D2A69374100E11F87 /* GoogleService-Info.plist */; };
 		3B89EFCF2A6A2FA90033DC2F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B89EFCE2A6A2FA90033DC2F /* Router.swift */; };
+		3BBBAAA02A6CDDB300D19D8B /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBAA9F2A6CDDB300D19D8B /* UIViewController+.swift */; };
 		3BFB669F2A651B5400F66A7A /* TodoAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BFB669E2A651B5400F66A7A /* TodoAdd.storyboard */; };
 		9904B60F1EFF80D47283F343 /* Pods_TodoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC579A4E3E544AD651814879 /* Pods_TodoApp.framework */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		3B81206B2A69232500E11F87 /* TodoEdit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoEdit.storyboard; sourceTree = "<group>"; };
 		3B81206D2A69374100E11F87 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B89EFCE2A6A2FA90033DC2F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		3BBBAA9F2A6CDDB300D19D8B /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		3BFB669E2A651B5400F66A7A /* TodoAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoAdd.storyboard; sourceTree = "<group>"; };
 		4E03C1B43EC900001F5B3F7A /* Pods-TodoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.debug.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5EAE802115F72830F52448B5 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -102,10 +104,10 @@
 		3B45FD342A594E2100043A5A /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
-				3B89EFCD2A6A2F910033DC2F /* Router */,
+				3B8365372A6CDCEE006526A2 /* Util */,
 				3B45FD352A594E2100043A5A /* AppDelegate.swift */,
 				3B45FD372A594E2100043A5A /* SceneDelegate.swift */,
-				3B7D41452A5A684B0083DD42 /* Main */,
+				3B7D41452A5A684B0083DD42 /* LoginMain */,
 				3B45FD3E2A594E2200043A5A /* Assets.xcassets */,
 				3B45FD402A594E2200043A5A /* LaunchScreen.storyboard */,
 				3B0C47CF2A6CB2BF00ECFB08 /* SplashViewController.swift */,
@@ -117,13 +119,13 @@
 			path = TodoApp;
 			sourceTree = "<group>";
 		};
-		3B7D41452A5A684B0083DD42 /* Main */ = {
+		3B7D41452A5A684B0083DD42 /* LoginMain */ = {
 			isa = PBXGroup;
 			children = (
 				3B45FD392A594E2100043A5A /* LoginViewController.swift */,
 				3B45FD3B2A594E2100043A5A /* Login.storyboard */,
 			);
-			path = Main;
+			path = LoginMain;
 			sourceTree = "<group>";
 		};
 		3B7D41462A5A68820083DD42 /* TodoList */ = {
@@ -145,6 +147,15 @@
 				3B81206D2A69374100E11F87 /* GoogleService-Info.plist */,
 			);
 			path = TodoEdit;
+			sourceTree = "<group>";
+		};
+		3B8365372A6CDCEE006526A2 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				3B89EFCD2A6A2F910033DC2F /* Router */,
+				3BBBAA9F2A6CDDB300D19D8B /* UIViewController+.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		3B89EFCD2A6A2F910033DC2F /* Router */ = {
@@ -286,6 +297,7 @@
 			files = (
 				3B89EFCF2A6A2FA90033DC2F /* Router.swift in Sources */,
 				3B45FD4A2A594EBE00043A5A /* TodoListViewController.swift in Sources */,
+				3BBBAAA02A6CDDB300D19D8B /* UIViewController+.swift in Sources */,
 				3B45FD3A2A594E2100043A5A /* LoginViewController.swift in Sources */,
 				3B0C47D02A6CB2BF00ECFB08 /* SplashViewController.swift in Sources */,
 				3B45FD362A594E2100043A5A /* AppDelegate.swift in Sources */,
