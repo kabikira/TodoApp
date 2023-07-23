@@ -11,19 +11,26 @@ import Firebase
 final class Router {
     static let shared: Router =  .init()
     private init() {}
+    // Firebaseをインポートしないほうがいいかもしれない?? ログイン時UserDafaultsでに値をいれて判断したほうがよい､ログアウト時にその値を削除する
+    let user = Auth.auth().currentUser
 
     private var window: UIWindow?
     func showRoot(windon: UIWindow?) {
-        if Auth.auth().currentUser != nil {
-            print("No Login")
-        } else {
-            print("Login!!!!!!!!")
+        Auth.auth().addStateDidChangeListener{ (auth, user) in
+            if user != nil {
+                guard let vc = UIStoryboard.init(name: "TodoList", bundle: nil).instantiateInitialViewController() else {
+                    return
+                }
+                let nav = UINavigationController(rootViewController: vc)
+                windon?.rootViewController = nav
+            } else {
+                guard let vc = UIStoryboard.init(name: "Login", bundle: nil).instantiateInitialViewController() else {
+                    return
+                }
+                let nav = UINavigationController(rootViewController: vc)
+                windon?.rootViewController = nav
+            }
         }
-        guard let vc = UIStoryboard.init(name: "Login", bundle: nil).instantiateInitialViewController() else {
-            return
-        }
-        let nav = UINavigationController(rootViewController: vc)
-        windon?.rootViewController = nav
         windon?.makeKeyAndVisible()
         self.window = windon
     }
