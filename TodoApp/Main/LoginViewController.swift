@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet private weak var registerEmailTextField: UITextField!
     @IBOutlet private weak var registerPasswordTextField: UITextField!
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
                 if let user = result?.user {
                     print("ユーザー作成完了 uid:" + user.uid)
                     // ②FirestoreのUsersコレクションにdocumentID = ログインしたuidでデータを作成する
-                    Firestore.firestore().collection("uses").document(user.uid).setData( ["name": name], completion: { error in
+                    Firestore.firestore().collection("users").document(user.uid).setData( ["name": name], completion: { error in
                         if let error = error {
                             // ②が失敗した場合
                             print("Firestore 新規登録失敗 " + error.localizedDescription)
@@ -42,10 +42,7 @@ class ViewController: UIViewController {
                             // ③成功した場合はTodo一覧画面に画面遷移を行う
 //                            let storyboard: UIStoryboard = self.storyboard!
 //                            let next = storyboard.instantiateViewController(withIdentifier: "TodoListViewController")
-                            guard let next = UIStoryboard(name: "TodoList", bundle: nil).instantiateInitialViewController() as? TodoListViewController else {
-                                return
-                            }
-                            self.present(next, animated: true, completion: nil)
+                            Router.shared.showTodoList(from: self)
                         }
 
                     })
@@ -68,10 +65,7 @@ class ViewController: UIViewController {
                 if let user = result?.user {
                     print("ログイン完了 uid:" + user.uid)
                     // ②成功した場合はTodo一覧画面に画面遷移を行う
-                    guard let next = UIStoryboard(name: "TodoList", bundle: nil).instantiateInitialViewController() as? TodoListViewController else {
-                        return
-                    }
-                    self.present(next, animated: true, completion: nil)
+                    Router.shared.showTodoList(from: self)
                 } else if let error = error {
                     // ①が失敗した場合
                     print("ログイン失敗 " + error.localizedDescription)

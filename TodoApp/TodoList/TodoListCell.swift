@@ -11,12 +11,14 @@ final class TodoListCell: UITableViewCell {
 
     static var className: String { String(describing: TodoListCell.self)}
 
-    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()
         self.titleLabel.text = nil
     }
+
+
 
 
 }

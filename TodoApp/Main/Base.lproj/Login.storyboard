@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,6 +128,7 @@
                             <constraint firstItem="llQ-4F-Plz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="thB-VT-sXs"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="iZJ-cy-hzk"/>
                     <connections>
                         <outlet property="loginEmailTextField" destination="ySy-ZI-SBx" id="BRE-W3-3oO"/>
                         <outlet property="loginPasswordTextField" destination="esd-2A-7RD" id="RQy-EH-ifh"/>
@@ -138,7 +139,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20.610687022900763" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="2800.7633587786258" y="3.5211267605633805"/>
         </scene>
     </scenes>
     <resources>
