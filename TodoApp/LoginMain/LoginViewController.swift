@@ -21,49 +21,38 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction private func tapRegisterButton(_ sender: Any) {
-        if let email = registerEmailTextField.text,
+        guard let email = registerEmailTextField.text,
            let password = registerPasswordTextField.text,
-           let name = registerNameTextField.text {
-            // ①FirebaseAuthにemailとpasswordでアカウントを作成する
-            Auth.auth().createUser(withEmail: email, password: password, completion: { (result, error) in
-                if let user = result?.user {
-                    print("ユーザー作成完了 uid:" + user.uid)
-                    // ②FirestoreのUsersコレクションにdocumentID = ログインしたuidでデータを作成する
-                    Firestore.firestore().collection("users").document(user.uid).setData( ["name": name], completion: { error in
-                        if let error = error {
-                            // ②が失敗した場合
-                            self.showErrorAlert(error: error, title: "Firestore 新規登録失敗", vc: self)
-                        } else {
-                            print("ユーザー作成完了 name:" + name)
-                            // ③成功した場合はTodo一覧画面に画面遷移を行う
-//                            let storyboard: UIStoryboard = self.storyboard!
-//                            let next = storyboard.instantiateViewController(withIdentifier: "TodoListViewController")
-                            Router.shared.showTodoList(from: self)
-                        }
-
-                    })
-                } else if let error = error {
-                    self.showErrorAlert(error: error, title: "Firebase Auth 新規登録失敗 ", vc: self)
-                }
-            })
-
+           let name = registerNameTextField.text else {
+            return
+        }
+        Task {
+            do {
+                let user = try await FirebaseUserManager.registerUserToAuthentication(email: email, password: password)
+                print("ユーザー作成完了 uid:" + user.uid)
+                try await FirebaseUserManager.createUserToFirestore(userId: user.uid, userName: name)
+                print("ユーザー作成完了 name:" + name)
+                Router.shared.showTodoList(from: self)
+            } catch {
+                self.showErrorAlert(error: error, title: "新規登録失敗 ", vc: self)
+            }
         }
     }
 
     @IBAction private func tapLoginButton(_ sender: Any) {
-        if let email = loginEmailTextField.text,
-           let password = loginPasswordTextField.text {
-            // ①FirebaseAuthにemailとpasswordでログインを行う
-            Auth.auth().signIn(withEmail: email, password: password, completion: { (result, error) in
-                if let user = result?.user {
-                    print("ログイン完了 uid:" + user.uid)
-                    // ②成功した場合はTodo一覧画面に画面遷移を行う
-                    Router.shared.showTodoList(from: self)
-                } else if let error = error {
-                    // ①が失敗した場合
-                    self.showErrorAlert(error: error, title: "ログイン失敗", vc: self)
-                }
-            })
+        guard let email = loginEmailTextField.text,
+           let password = loginPasswordTextField.text else {
+            return
+        }
+
+        Task {
+            do {
+                try await FirebaseUserManager.loginUserToAuthentication(email: email, password: password)
+                print("ログイン完了 uid:" + Auth.auth().currentUser!.uid)
+
+            } catch {
+                self.showErrorAlert(error: error, title: "ログイン失敗", vc: self)
+            }
         }
     }
 }
