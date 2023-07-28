@@ -7,7 +7,7 @@
 
 import Firebase
 
-struct FirebaseUserManager {
+final class FirebaseUserManager {
     var id: String
     var name: String
 
@@ -30,6 +30,7 @@ struct FirebaseUserManager {
     static func loginUserToAuthentication(email: String, password: String) async throws {
             try await Auth.auth().signIn(withEmail: email, password: password)
         }
+    //TodoListで使用
     static func getUserDataForFirestore() async throws -> FirebaseUserManager {
             guard let currentUser = Auth.auth().currentUser else {
                 throw NSError(domain: "FirebaseAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "No current user"])
