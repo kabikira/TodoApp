@@ -1,13 +1,13 @@
 //
-//  TodoAddViewController.swift
+//  SplashViewController.swift
 //  TodoApp
 //
-//  Created by koala panda on 2023/07/08.
+//  Created by koala panda on 2023/07/23.
 //
 
 import UIKit
 
-class TodoAddViewController: UIViewController {
+class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

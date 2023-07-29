@@ -17,9 +17,11 @@ final class TodoListCell: UITableViewCell {
         super.prepareForReuse()
         self.titleLabel.text = nil
     }
+    func configure(item: TodoItem) {
+        titleLabel.text = item.title
+    }
 
-//    func configure(qiitaModel: QiitaModel) {
-//        self.tatleLabel.text = qiitaModel.title
-//    }
+
+
 
 }
