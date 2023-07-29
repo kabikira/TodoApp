@@ -9,15 +9,9 @@ import UIKit
 import Firebase
 
 class TodoListViewController: UIViewController {
-
-    // Firestoreから取得するTodoのid,title,detail,isDoneを入れる配列を用意
-    var todoIdArray: [String] = []
-    var todoTitleArray: [String] = []
-    var todoDetailArray: [String] = []
-    var todoIsDoneArray: [Bool] = []
-    // 画面下部の未完了、完了済みを判定するフラグ(falseは未完了)
+    
+    var todoItems: [TodoItem] = []
     var isDone: Bool = false
-
     var listener: ListenerRegistration!
 
     @IBOutlet private weak var tableView: UITableView! {
@@ -32,59 +26,30 @@ class TodoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        getTodoDataForFirestore()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .updateTodoListview, object: nil)
     }
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        // ①ログイン済みかどうか確認
-//        if let user = Auth.auth().currentUser {
-//            // ②ログインしているユーザー名の取得
-//            Firestore.firestore().collection("users").document("FBx26V3tADWZvdRTA32Je5aWRLc2").getDocument(completion: {(snapshot,error) in
-//                if let snap = snapshot {
-//                    if let data = snap.data() {
-//                        self.userNameLabel.text = data["name"] as? String
-//                    }
-//                } else if let error = error {
-//                    print("ユーザー名取得失敗: " + error.localizedDescription)
-//                }
-//            })
-//        }
-//    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("viewWillAppear called")
-        if let userId = Auth.auth().currentUser?.uid {
-            if listener == nil {
-                listener = Firestore.firestore().collection("users/\(userId)/todos").whereField("isDone", isEqualTo: isDone).order(by: "createdAt").addSnapshotListener({ (querySnapshot, error) in
-                    if let querySnapshot = querySnapshot {
-                        var idArray: [String] = []
-                        var titleArray: [String] = []
-                        var deetailArray: [String] = []
-                        var isDoneArray: [Bool] = []
-                        for doc in querySnapshot.documents {
-                            let data = doc.data()
-                            idArray.append(doc.documentID)
-                            titleArray.append(data["title"] as! String)
-                            deetailArray.append(data["detail"] as! String)
-                            isDoneArray.append(data["isDone"] as! Bool)
-                        }
-                        self.todoIdArray = idArray
-                        self.todoTitleArray = titleArray
-                        self.todoDetailArray = deetailArray
-                        self.todoIsDoneArray = isDoneArray
-                        self.tableView.reloadData()
-
-                    } else if let error = error {
-                        print("TODO取得失敗: " + error.localizedDescription)
-                    }
-                })
-            } else {
-                print("!!!!!!!!!!!!")
-            }
+}
+// MARK: - Actions
+private extension TodoListViewController {
+    @IBAction func tapAddButton(_ sender: Any) {
+        // ①Todo作成画面に画面遷移
+        Router.shared.showTodoAdd(from: self)
+    }
+    @IBAction func changeDoneControl(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            isDone = false
+            getTodoDataForFirestore()
+        case 1:
+            isDone = true
+            getTodoDataForFirestore()
+        default:
+            isDone = false
+            getTodoDataForFirestore()
         }
     }
-
     @IBAction func tapLogoutButton(_ sender: Any) {
         // ①ログイン済みかどうかを確認
         if Auth.auth().currentUser != nil {
@@ -103,70 +68,57 @@ class TodoListViewController: UIViewController {
             }
         }
     }
-    
-    @IBAction func tapAddButton(_ sender: Any) {
-        // ①Todo作成画面に画面遷移
-        Router.shared.showTodoAdd(from: self)
-    }
 
-    @IBAction func changeDoneControl(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            isDone = false
-            getTodoDataForFirestore()
-        case 1:
-            isDone = true
-            getTodoDataForFirestore()
-        default:
-            isDone = false
-            getTodoDataForFirestore()
+}
+// MARK: - Data Fetching
+private extension TodoListViewController {
+    @objc private func reloadData() {
+        getTodoDataForFirestore()
+        print("受け取ったよ")
+    }
+    func getTodoDataForFirestore()  {
+        Task {
+            do {
+                let querySnapshot = try await FirebaseUserManager.fetchQuerySnapshot(isDone: isDone)
+                let todoItems = createTodoItems(from: querySnapshot)
+                self.todoItems = todoItems
+                tableView.reloadData()
+                print(todoItems)
+            } catch {
+                print("error")
+            }
         }
     }
-
-    func getTodoDataForFirestore() {
-        if let user = Auth.auth().currentUser {
-            Firestore.firestore().collection("users/\(user.uid)/todos").whereField("isDone", isEqualTo: isDone).order(by: "createdAt").getDocuments(completion: { (querySnapshot, error) in
-                if let querySnapshot = querySnapshot {
-                    var idArray:[String] = []
-                    var titleArray:[String] = []
-                    var detailArray:[String] = []
-                    var isDoneArray:[Bool] = []
-                    for doc in querySnapshot.documents {
-                        let data = doc.data()
-                        idArray.append(doc.documentID)
-                        titleArray.append(data["title"] as! String)
-                        detailArray.append(data["detail"] as! String)
-                        isDoneArray.append(data["isDone"] as! Bool)
-                    }
-                    self.todoIdArray = idArray
-                    self.todoTitleArray = titleArray
-                    self.todoDetailArray = detailArray
-                    self.todoIsDoneArray = isDoneArray
-                    print(self.todoTitleArray)
-
-                    self.tableView.reloadData()
-
-
-                } else if let error = error {
-                    print("TODO取得失敗: " + error.localizedDescription)
-                }
-            })
+    func createTodoItems(from querySnapshot: QuerySnapshot) -> [TodoItem] {
+        let todoItems = querySnapshot.documents.compactMap { doc -> TodoItem? in
+            let data = doc.data()
+            guard
+                let title = data["title"] as? String,
+                let detail = data["detail"] as? String,
+                let isDone = data["isDone"] as? Bool
+            else { return nil }
+            return TodoItem(
+                id: doc.documentID,
+                title: title,
+                detail: detail,
+                isDone: isDone
+            )
         }
+        return todoItems
     }
-
 }
 
 extension TodoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.shared.showTodoEdit(from: self, todoId: todoIdArray[indexPath.row], title: todoTitleArray[indexPath.row], detail: todoDetailArray[indexPath.row], todoIsDone: todoIsDoneArray[indexPath.row])
+        Router.shared.showTodoEdit(from: self, todoItem: todoItems[indexPath.row])
     }
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // 未完了・完了済みの切り替えのスワイプ
         let editAction = UIContextualAction(style: .normal, title: "Edit", handler: {(action :UIContextualAction, view: UIView, completion: (Bool) -> Void) in
             if let user = Auth.auth().currentUser {
-                Firestore.firestore().collection("users/\(user.uid)/todos").document(self.todoIdArray[indexPath.row]).updateData(
+                Firestore.firestore().collection("users/\(user.uid)/todos").document(self.todoItems[indexPath.row].id).updateData(
                     [
-                        "isDone": !self.todoIsDoneArray[indexPath.row],
+                        "isDone": !self.todoItems[indexPath.row].isDone,
                         "updatedAt": FieldValue.serverTimestamp()
                     ]
                     ,completion: { error in
@@ -191,7 +143,7 @@ extension TodoListViewController: UITableViewDelegate {
         //削除のスワイプ
         let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: { (action: UIContextualAction, view: UIView, completion: (Bool) -> Void) in
             if let user = Auth.auth().currentUser {
-                Firestore.firestore().collection("users/\(user.uid)/todos").document(self.todoIdArray[indexPath.row]).delete() { error in
+                Firestore.firestore().collection("users/\(user.uid)/todos").document(self.todoItems[indexPath.row].id).delete() { error in
                     if let error = error  {
                         self.showErrorAlert(error: error, title: "TODO削除失敗", vc: self)
                     } else {
@@ -202,7 +154,7 @@ extension TodoListViewController: UITableViewDelegate {
             }
         })
         deleteAction.backgroundColor = UIColor(red: 214/255.0, green: 69/255.0, blue: 65/255.0, alpha: 1)
-                deleteAction.image = UIImage(systemName: "clear")
+        deleteAction.image = UIImage(systemName: "clear")
         // スワイプアクションを追加
         let swipeActionConfig = UISwipeActionsConfiguration(actions: [editAction, deleteAction])
         // fullスワイプ時に挙動が起きないように制御
@@ -213,14 +165,17 @@ extension TodoListViewController: UITableViewDelegate {
 }
 extension TodoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todoTitleArray.count
+        return todoItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TodoListCell.className) as? TodoListCell else {
             fatalError()
         }
-        cell.titleLabel.text = todoTitleArray[indexPath.row]
+
+        let item = todoItems[indexPath.row]
+
+        cell.configure(item: item)
         return cell
     }
 

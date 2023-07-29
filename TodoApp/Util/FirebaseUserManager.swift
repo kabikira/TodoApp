@@ -30,12 +30,15 @@ final class FirebaseUserManager {
     static func loginUserToAuthentication(email: String, password: String) async throws {
             try await Auth.auth().signIn(withEmail: email, password: password)
         }
-    //TodoListで使用
-    static func getUserDataForFirestore() async throws -> FirebaseUserManager {
-            guard let currentUser = Auth.auth().currentUser else {
-                throw NSError(domain: "FirebaseAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "No current user"])
-            }
-        let snapshot = try await Firestore.firestore().collection("users").document(currentUser.uid).getDocument()
-                return FirebaseUserManager(doc: snapshot)
-            }
+
+    static func fetchQuerySnapshot(isDone: Bool) async throws -> QuerySnapshot {
+        guard let user = Auth.auth().currentUser else {
+            throw NSError(domain: "FirebaseAuth", code: -1, userInfo: [NSLocalizedDescriptionKey: "No current user"])
+        }
+        let querySnapshot = try await Firestore.firestore().collection("users/\(user.uid)/todos")
+            .whereField("isDone", isEqualTo: isDone)
+            .order(by: "createdAt")
+            .getDocuments()
+        return querySnapshot
+    }
 }

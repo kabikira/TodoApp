@@ -23,6 +23,8 @@
 		3B81206C2A69232500E11F87 /* TodoEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B81206B2A69232500E11F87 /* TodoEdit.storyboard */; };
 		3B81206E2A69374100E11F87 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B81206D2A69374100E11F87 /* GoogleService-Info.plist */; };
 		3B8307232A72BA8600C3068B /* FirebaseUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8307222A72BA8600C3068B /* FirebaseUserManager.swift */; };
+		3B8307262A73B6E700C3068B /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8307252A73B6E700C3068B /* TodoItem.swift */; };
+		3B8307282A741DB500C3068B /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8307272A741DB500C3068B /* NotificationName.swift */; };
 		3B89EFCF2A6A2FA90033DC2F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B89EFCE2A6A2FA90033DC2F /* Router.swift */; };
 		3BBBAAA02A6CDDB300D19D8B /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBAA9F2A6CDDB300D19D8B /* UIViewController+.swift */; };
 		3BFB669F2A651B5400F66A7A /* TodoAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BFB669E2A651B5400F66A7A /* TodoAdd.storyboard */; };
@@ -48,6 +50,8 @@
 		3B81206B2A69232500E11F87 /* TodoEdit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoEdit.storyboard; sourceTree = "<group>"; };
 		3B81206D2A69374100E11F87 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B8307222A72BA8600C3068B /* FirebaseUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserManager.swift; sourceTree = "<group>"; };
+		3B8307252A73B6E700C3068B /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
+		3B8307272A741DB500C3068B /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		3B89EFCE2A6A2FA90033DC2F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		3BBBAA9F2A6CDDB300D19D8B /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		3BFB669E2A651B5400F66A7A /* TodoAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoAdd.storyboard; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 				3B8365372A6CDCEE006526A2 /* Util */,
 				3B45FD352A594E2100043A5A /* AppDelegate.swift */,
 				3B45FD372A594E2100043A5A /* SceneDelegate.swift */,
+				3B8307242A73B6C500C3068B /* Model */,
 				3B7D41452A5A684B0083DD42 /* LoginMain */,
 				3B45FD3E2A594E2200043A5A /* Assets.xcassets */,
 				3B45FD402A594E2200043A5A /* LaunchScreen.storyboard */,
@@ -151,11 +156,20 @@
 			path = TodoEdit;
 			sourceTree = "<group>";
 		};
+		3B8307242A73B6C500C3068B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3B8307252A73B6E700C3068B /* TodoItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3B8365372A6CDCEE006526A2 /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				3B89EFCD2A6A2F910033DC2F /* Router */,
 				3BBBAA9F2A6CDDB300D19D8B /* UIViewController+.swift */,
+				3B8307272A741DB500C3068B /* NotificationName.swift */,
 				3B8307222A72BA8600C3068B /* FirebaseUserManager.swift */,
 			);
 			path = Util;
@@ -306,6 +320,8 @@
 				3B0C47D02A6CB2BF00ECFB08 /* SplashViewController.swift in Sources */,
 				3B45FD362A594E2100043A5A /* AppDelegate.swift in Sources */,
 				3B81206A2A68E46A00E11F87 /* TodoAddViewController.swift in Sources */,
+				3B8307262A73B6E700C3068B /* TodoItem.swift in Sources */,
+				3B8307282A741DB500C3068B /* NotificationName.swift in Sources */,
 				3B45FD4E2A594EFE00043A5A /* TodoEditViewController.swift in Sources */,
 				3B45FD382A594E2100043A5A /* SceneDelegate.swift in Sources */,
 				3B7D414D2A5A69230083DD42 /* TodoListCell.swift in Sources */,

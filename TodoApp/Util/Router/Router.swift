@@ -48,15 +48,11 @@ final class Router {
         }
         showPresent(from: from, to: todoadd)
     }
-    func showTodoEdit(from: UIViewController, todoId: String, title: String, detail: String, todoIsDone: Bool) {
+    func showTodoEdit(from: UIViewController, todoItem: TodoItem) {
         guard let todoEdit = UIStoryboard.init(name: "TodoEdit", bundle: nil).instantiateInitialViewController() as? TodoEditViewController else {
             return
         }
-        // TODO 本来はモデル作って渡す
-        todoEdit.todoId = todoId
-        todoEdit.todoTitle = title
-        todoEdit.todoDetail = detail
-        todoEdit.todoIsDone = todoIsDone
+        todoEdit.configure(todoItems: todoItem)
         
         show(from: from, to: todoEdit)
     }
