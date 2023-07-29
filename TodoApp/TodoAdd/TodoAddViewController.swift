@@ -13,12 +13,9 @@ class TodoAddViewController: UIViewController {
     @IBOutlet private weak var titleTextField: UITextField!
     @IBOutlet private weak var detailTextView: UITextView!
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-
-
     }
     override func viewDidLayoutSubviews() {
         detailTextView.layer.borderWidth = 1.0
@@ -26,7 +23,6 @@ class TodoAddViewController: UIViewController {
         detailTextView.layer.cornerRadius = 5.0
         detailTextView.layer.masksToBounds = true
     }
-    
 
     @IBAction func tapAddButton(_ sender: Any) {
         if let title = titleTextField.text,
@@ -50,6 +46,8 @@ class TodoAddViewController: UIViewController {
                         } else {
                             print("TODO作成成功")
                             // ④Todo一覧画面に戻る
+                            NotificationCenter.default.post(name: .updateTodoListview, object: nil)
+                            print("通知")
                             self.dismiss(animated: true, completion: nil)
                         }
                     })

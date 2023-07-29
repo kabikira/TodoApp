@@ -15,21 +15,21 @@ class TodoEditViewController: UIViewController {
     @IBOutlet private weak var doneButton: UIButton!
     @IBOutlet private weak var isDoneLabel: UILabel!
 
-    // ①一覧画面から受け取るように変数を用意
-    var todoId: String!
-    var todoTitle: String!
-    var todoDetail: String!
-    var todoIsDone: Bool!
+
+    private var todoItems: TodoItem?
+    func configure(todoItems: TodoItem) {
+        self.todoItems = todoItems
+    }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationItem.hidesBackButton = true
+        //        self.navigationItem.hidesBackButton = true
         // ②初期値をセット
-        titleTextField.text = todoTitle
-        detailTextView.text = todoDetail
+        titleTextField.text = todoItems?.title
+        detailTextView.text = todoItems?.detail
 
-        switch todoIsDone {
+        switch todoItems?.isDone {
         case false:
             isDoneLabel.text = "未完了"
             doneButton.setTitle("完了済みにする", for: .normal)
@@ -46,15 +46,18 @@ class TodoEditViewController: UIViewController {
     }
     @IBAction private func tapDoneButton(_ sender: Any) {
         if let user = Auth.auth().currentUser {
-            Firestore.firestore().collection("users/\(user.uid)/todos").document(todoId).updateData(
+            guard let todoItems = todoItems else { return }
+            Firestore.firestore().collection("users/\(user.uid)/todos").document(todoItems.id).updateData(
                 [
-                    "isDone": !todoIsDone,
+                    "isDone": !(todoItems.isDone),
                     "updatedAt": FieldValue.serverTimestamp()
                 ]
                 ,completion: { error in
-                    if let error = error {                        self.showErrorAlert(error: error, title: "TODO更新失敗", vc: self)
+                    if let error = error {
+                        self.showErrorAlert(error: error, title: "TODO更新失敗", vc: self)
                     } else {
                         print("TODO更新成功")
+                        NotificationCenter.default.post(name: .updateTodoListview, object: nil)
                         self.navigationController?.popViewController(animated: true)
                     }
                 })
@@ -65,7 +68,8 @@ class TodoEditViewController: UIViewController {
         if let title = titleTextField.text,
            let detail = detailTextView.text {
             if let user = Auth.auth().currentUser {
-                Firestore.firestore().collection("users/\(user.uid)/todos").document(todoId).updateData(
+                guard let todoItems = todoItems else { return }
+                Firestore.firestore().collection("users/\(user.uid)/todos").document(todoItems.id).updateData(
                     [
                         "title": title,
                         "detail": detail,
@@ -76,6 +80,7 @@ class TodoEditViewController: UIViewController {
                             self.showErrorAlert(error: error, title: "TODO更新失敗", vc: self)
                         } else {
                             print("TODO更新成功")
+                            NotificationCenter.default.post(name: .updateTodoListview, object: nil)
                             self.navigationController?.popViewController(animated: true)
                         }
                     })
@@ -85,15 +90,17 @@ class TodoEditViewController: UIViewController {
 
     @IBAction private func tapDeleteButton(_ sender: Any) {
         if let user = Auth.auth().currentUser {
-                    Firestore.firestore().collection("users/\(user.uid)/todos").document(todoId).delete(){ error in
-                        if let error = error {
-                            self.showErrorAlert(error: error, title: "TODO削除失敗", vc: self)
-                        } else {
-                            print("TODO削除成功")
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    }
+            guard let todoItems = todoItems else { return }
+            Firestore.firestore().collection("users/\(user.uid)/todos").document(todoItems.id).delete(){ error in
+                if let error = error {
+                    self.showErrorAlert(error: error, title: "TODO削除失敗", vc: self)
+                } else {
+                    print("TODO削除成功")
+                    NotificationCenter.default.post(name: .updateTodoListview, object: nil)
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
+        }
+    }
 
 }
