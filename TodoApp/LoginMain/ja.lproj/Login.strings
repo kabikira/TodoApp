@@ -1,0 +1,27 @@
+
+/* Class = "UILabel"; text = "新規登録"; ObjectID = "1Eu-gI-ztP"; */
+"1Eu-gI-ztP.text" = "新規登録";
+
+/* Class = "UILabel"; text = "ログイン"; ObjectID = "3aJ-aj-Yqw"; */
+"3aJ-aj-Yqw.text" = "ログイン";
+
+/* Class = "UIButton"; normalTitle = "新規登録"; ObjectID = "7B4-MJ-O4S"; */
+"7B4-MJ-O4S.normalTitle" = "新規登録";
+
+/* Class = "UITextField"; placeholder = "ユーザー名"; ObjectID = "7SZ-PU-JCO"; */
+"7SZ-PU-JCO.placeholder" = "ユーザー名";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "UHg-Xw-UNw"; */
+"UHg-Xw-UNw.placeholder" = "Password";
+
+/* Class = "UIButton"; normalTitle = "ログイン"; ObjectID = "dcO-fW-ppA"; */
+"dcO-fW-ppA.normalTitle" = "ログイン";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "esd-2A-7RD"; */
+"esd-2A-7RD.placeholder" = "Password";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "fhk-6m-D6d"; */
+"fhk-6m-D6d.placeholder" = "Email";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "ySy-ZI-SBx"; */
+"ySy-ZI-SBx.placeholder" = "Email";
