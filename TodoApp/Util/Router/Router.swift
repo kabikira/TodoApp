@@ -6,34 +6,31 @@
 //
 
 import UIKit
-import Firebase
+
 
 final class Router {
-    static let shared: Router =  .init()
+    static let shared: Router = .init()
     private init() {}
-    // Firebaseをインポートしないほうがいいかもしれない?? ログイン時UserDafaultsでに値をいれて判断したほうがよい､ログアウト時にその値を削除する
-    let user = Auth.auth().currentUser
+
 
     private var window: UIWindow?
-    func showRoot(windon: UIWindow?) {
-        Auth.auth().addStateDidChangeListener{ (auth, user) in
-            if user != nil {
+    func showRoot(window: UIWindow?) {
+        if UserDefaults.standard.isLogined {
                 guard let vc = UIStoryboard.init(name: "TodoList", bundle: nil).instantiateInitialViewController() else {
                     return
                 }
                 let nav = UINavigationController(rootViewController: vc)
-                windon?.rootViewController = nav
+                window?.rootViewController = nav
             } else {
                 guard let vc = UIStoryboard.init(name: "Login", bundle: nil).instantiateInitialViewController() else {
                     return
                 }
                 let nav = UINavigationController(rootViewController: vc)
-                windon?.rootViewController = nav
+                window?.rootViewController = nav
             }
+        window?.makeKeyAndVisible()
+        self.window = window
         }
-        windon?.makeKeyAndVisible()
-        self.window = windon
-    }
 
     func showTodoList(from: UIViewController) {
         guard let todoList = UIStoryboard.init(name: "TodoList", bundle: nil).instantiateInitialViewController() else {
@@ -58,7 +55,7 @@ final class Router {
     }
 
     func showReStart() {
-        showRoot(windon: window)
+        showRoot(window: window)
     }
     private func show(from: UIViewController, to: UIViewController, completion:(() -> Void)? = nil) {
         if let nav = from.navigationController {

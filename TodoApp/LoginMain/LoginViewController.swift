@@ -32,6 +32,7 @@ class LoginViewController: UIViewController {
                 print("ユーザー作成完了 uid:" + user.uid)
                 try await FirebaseUserManager.createUserToFirestore(userId: user.uid, userName: name)
                 print("ユーザー作成完了 name:" + name)
+                UserDefaults.standard.isLogined = true
                 Router.shared.showTodoList(from: self)
             } catch {
                 self.showErrorAlert(error: error, title: "新規登録失敗 ", vc: self)
@@ -49,6 +50,8 @@ class LoginViewController: UIViewController {
             do {
                 try await FirebaseUserManager.loginUserToAuthentication(email: email, password: password)
                 print("ログイン完了 uid:" + Auth.auth().currentUser!.uid)
+                UserDefaults.standard.isLogined = true
+                Router.shared.showTodoList(from: self)
 
             } catch {
                 self.showErrorAlert(error: error, title: "ログイン失敗", vc: self)
