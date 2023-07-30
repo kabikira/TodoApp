@@ -24,8 +24,10 @@
 		3B81206E2A69374100E11F87 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B81206D2A69374100E11F87 /* GoogleService-Info.plist */; };
 		3B8307232A72BA8600C3068B /* FirebaseUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8307222A72BA8600C3068B /* FirebaseUserManager.swift */; };
 		3B8307262A73B6E700C3068B /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8307252A73B6E700C3068B /* TodoItem.swift */; };
-		3B8307282A741DB500C3068B /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8307272A741DB500C3068B /* NotificationName.swift */; };
+		3B8307282A741DB500C3068B /* NotificationName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8307272A741DB500C3068B /* NotificationName+.swift */; };
 		3B83074C2A7613C100C3068B /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B83074B2A7613C100C3068B /* UserDefaults+.swift */; };
+		3B8307552A76210E00C3068B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B8307572A76210E00C3068B /* Localizable.strings */; };
+		3B83075A2A762BE000C3068B /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8307592A762BE000C3068B /* AppConstants.swift */; };
 		3B89EFCF2A6A2FA90033DC2F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B89EFCE2A6A2FA90033DC2F /* Router.swift */; };
 		3BBBAAA02A6CDDB300D19D8B /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBAA9F2A6CDDB300D19D8B /* UIViewController+.swift */; };
 		3BFB669F2A651B5400F66A7A /* TodoAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BFB669E2A651B5400F66A7A /* TodoAdd.storyboard */; };
@@ -52,8 +54,11 @@
 		3B81206D2A69374100E11F87 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B8307222A72BA8600C3068B /* FirebaseUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserManager.swift; sourceTree = "<group>"; };
 		3B8307252A73B6E700C3068B /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
-		3B8307272A741DB500C3068B /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		3B8307272A741DB500C3068B /* NotificationName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+.swift"; sourceTree = "<group>"; };
 		3B83074B2A7613C100C3068B /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
+		3B8307522A76202800C3068B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		3B8307582A76210F00C3068B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3B8307592A762BE000C3068B /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		3B89EFCE2A6A2FA90033DC2F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		3BBBAA9F2A6CDDB300D19D8B /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		3BFB669E2A651B5400F66A7A /* TodoAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoAdd.storyboard; sourceTree = "<group>"; };
@@ -119,6 +124,7 @@
 				3B7D41452A5A684B0083DD42 /* LoginMain */,
 				3B45FD3E2A594E2200043A5A /* Assets.xcassets */,
 				3B45FD402A594E2200043A5A /* LaunchScreen.storyboard */,
+				3B8307572A76210E00C3068B /* Localizable.strings */,
 				3B0C47CF2A6CB2BF00ECFB08 /* SplashViewController.swift */,
 				3B45FD432A594E2200043A5A /* Info.plist */,
 				3B7D41462A5A68820083DD42 /* TodoList */,
@@ -171,9 +177,10 @@
 			children = (
 				3B89EFCD2A6A2F910033DC2F /* Router */,
 				3BBBAA9F2A6CDDB300D19D8B /* UIViewController+.swift */,
-				3B8307272A741DB500C3068B /* NotificationName.swift */,
+				3B8307272A741DB500C3068B /* NotificationName+.swift */,
 				3B8307222A72BA8600C3068B /* FirebaseUserManager.swift */,
 				3B83074B2A7613C100C3068B /* UserDefaults+.swift */,
+				3B8307592A762BE000C3068B /* AppConstants.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -239,6 +246,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 3B45FD292A594E2100043A5A;
 			productRefGroup = 3B45FD332A594E2100043A5A /* Products */;
@@ -259,6 +267,7 @@
 				3B81206E2A69374100E11F87 /* GoogleService-Info.plist in Resources */,
 				3B45FD422A594E2200043A5A /* LaunchScreen.storyboard in Resources */,
 				3B81206C2A69232500E11F87 /* TodoEdit.storyboard in Resources */,
+				3B8307552A76210E00C3068B /* Localizable.strings in Resources */,
 				3B45FD3F2A594E2200043A5A /* Assets.xcassets in Resources */,
 				3B45FD3D2A594E2100043A5A /* Login.storyboard in Resources */,
 				3BFB669F2A651B5400F66A7A /* TodoAdd.storyboard in Resources */,
@@ -319,13 +328,14 @@
 				3B45FD4A2A594EBE00043A5A /* TodoListViewController.swift in Sources */,
 				3B83074C2A7613C100C3068B /* UserDefaults+.swift in Sources */,
 				3BBBAAA02A6CDDB300D19D8B /* UIViewController+.swift in Sources */,
+				3B83075A2A762BE000C3068B /* AppConstants.swift in Sources */,
 				3B8307232A72BA8600C3068B /* FirebaseUserManager.swift in Sources */,
 				3B45FD3A2A594E2100043A5A /* LoginViewController.swift in Sources */,
 				3B0C47D02A6CB2BF00ECFB08 /* SplashViewController.swift in Sources */,
 				3B45FD362A594E2100043A5A /* AppDelegate.swift in Sources */,
 				3B81206A2A68E46A00E11F87 /* TodoAddViewController.swift in Sources */,
 				3B8307262A73B6E700C3068B /* TodoItem.swift in Sources */,
-				3B8307282A741DB500C3068B /* NotificationName.swift in Sources */,
+				3B8307282A741DB500C3068B /* NotificationName+.swift in Sources */,
 				3B45FD4E2A594EFE00043A5A /* TodoEditViewController.swift in Sources */,
 				3B45FD382A594E2100043A5A /* SceneDelegate.swift in Sources */,
 				3B7D414D2A5A69230083DD42 /* TodoListCell.swift in Sources */,
@@ -347,8 +357,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				3B45FD412A594E2200043A5A /* Base */,
+				3B8307522A76202800C3068B /* ja */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3B8307572A76210E00C3068B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B8307582A76210F00C3068B /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -358,6 +377,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -418,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

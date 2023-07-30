@@ -5,3 +5,15 @@
   Created by koala panda on 2023/07/30.
   
 */
+"Yes"     = "Yes";
+"No"      = "No";
+"Cancel"  = "Cancel";
+"Confirm" = "Confirm";
+"Search"  = "Search";
+"Else"    = "Other";
+"Edit"    = "Edit";
+"Done"    = "Done";
+"Friend"  = "Friends";
+"Save"    = "Save";
+"Title"   = "Title";
+"Decide"  = "Enter";

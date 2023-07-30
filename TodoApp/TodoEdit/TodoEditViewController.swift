@@ -93,7 +93,7 @@ class TodoEditViewController: UIViewController {
             guard let todoItems = todoItems else { return }
             Firestore.firestore().collection("users/\(user.uid)/todos").document(todoItems.id).delete(){ error in
                 if let error = error {
-                    self.showErrorAlert(error: error, title: "TODO削除失敗", vc: self)
+                    self.showErrorAlert(error: error, vc: self)
                 } else {
                     print("TODO削除成功")
                     NotificationCenter.default.post(name: .updateTodoListview, object: nil)

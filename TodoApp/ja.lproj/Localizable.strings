@@ -5,3 +5,15 @@
   Created by koala panda on 2023/07/30.
   
 */
+"Yes"     = "はい";
+"No"      = "いいえ";
+"Cancel"  = "キャンセル";
+"Confirm" = "確認";
+"Search"  = "検索";
+"Else"    = "その他";
+"Edit"    = "編集";
+"Done"    = "完了";
+"Friend"  = "友達";
+"Save"    = "保存";
+"Title"   = "タイトル";
+"Decide"  = "決定";

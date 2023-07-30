@@ -21,13 +21,28 @@ class TodoListViewController: UIViewController {
             tableView.dataSource = self
         }
     }
-    @IBOutlet private weak var userNameLabel: UILabel!
+    @IBOutlet private weak var userNameLabel: UILabel! {
+        didSet {
+            userNameLabel.text = NSLocalizedString("Yes", comment: "")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         getTodoDataForFirestore()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .updateTodoListview, object: nil)
+        let yes     = NSLocalizedString("Yes", comment: "")
+        let no      = NSLocalizedString("No", comment: "")
+        let cancel  = NSLocalizedString("Cancel", comment: "")
+        let confirm = NSLocalizedString("Confirm", comment: "")
+        let search  = NSLocalizedString("Search", comment: "")
+
+        print(yes)
+        print(no)
+        print(cancel)
+        print(confirm)
+        print(search)
     }
 
 }
@@ -64,7 +79,7 @@ private extension TodoListViewController {
 
             } catch let error as NSError {
                 // ②が失敗した場合
-                showErrorAlert(error: error, title: "ログアウト失敗", vc: self)
+                showErrorAlert(error: error, vc: self)
             }
         }
     }
@@ -93,9 +108,9 @@ private extension TodoListViewController {
         let todoItems = querySnapshot.documents.compactMap { doc -> TodoItem? in
             let data = doc.data()
             guard
-                let title = data["title"] as? String,
-                let detail = data["detail"] as? String,
-                let isDone = data["isDone"] as? Bool
+                let title = data[FirestoreKeys.Todo.title.rawValue] as? String,
+                let detail = data[FirestoreKeys.Todo.detail.rawValue] as? String,
+                let isDone = data[FirestoreKeys.Todo.isDone.rawValue] as? Bool
             else { return nil }
             return TodoItem(
                 id: doc.documentID,
@@ -123,7 +138,7 @@ extension TodoListViewController: UITableViewDelegate {
                     ]
                     ,completion: { error in
                         if let error = error {
-                            self.showErrorAlert(error: error, title: "TODO更新失敗", vc: self)
+                            self.showErrorAlert(error: error, vc: self)
                         } else {
                             print("TODO更新成功")
                             self.getTodoDataForFirestore()
@@ -145,7 +160,7 @@ extension TodoListViewController: UITableViewDelegate {
             if let user = Auth.auth().currentUser {
                 Firestore.firestore().collection("users/\(user.uid)/todos").document(self.todoItems[indexPath.row].id).delete() { error in
                     if let error = error  {
-                        self.showErrorAlert(error: error, title: "TODO削除失敗", vc: self)
+                        self.showErrorAlert(error: error, vc: self)
                     } else {
                         print("TODO削除成功")
                         self.getTodoDataForFirestore()

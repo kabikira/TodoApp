@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
                 UserDefaults.standard.isLogined = true
                 Router.shared.showTodoList(from: self)
             } catch {
-                self.showErrorAlert(error: error, title: "新規登録失敗 ", vc: self)
+                self.showErrorAlert(error: error, vc: self)
             }
         }
     }
@@ -54,7 +54,7 @@ class LoginViewController: UIViewController {
                 Router.shared.showTodoList(from: self)
 
             } catch {
-                self.showErrorAlert(error: error, title: "ログイン失敗", vc: self)
+                self.showErrorAlert(error: error, vc: self)
             }
         }
     }

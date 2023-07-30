@@ -42,7 +42,7 @@ class TodoAddViewController: UIViewController {
                     ,completion: { error in
                         if let error = error {
                             // ③が失敗した場合
-                            self.showErrorAlert(error: error, title: "TODO作成失敗", vc: self)
+                            self.showErrorAlert(error: error ,vc: self)
                         } else {
                             print("TODO作成成功")
                             // ④Todo一覧画面に戻る
