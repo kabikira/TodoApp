@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
-        Router.shared.showRoot(windon: window)
+        Router.shared.showRoot(window: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
